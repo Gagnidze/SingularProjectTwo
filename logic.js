@@ -1,45 +1,3 @@
-// const inputField = document.querySelector('#task_input');
-// const submitButton = document.querySelector('#submitBtn');
-// const currentToDos = document.querySelector('.ongoing_tasks');
-// const ongoingTasksList = document.querySelector('.ongoing_tasks');
-
-// // Adding Tasks to the ongoing tasks
-
-// submitButton.addEventListener('click', function () {
-//     if (inputField.value === '') {
-//         alert('You forgot to write your task');
-//     } else {
-// currentToDos.innerHTML += `<div class="current_task"><li>${inputField.value}</li> <input type="checkbox" class="status"> </div>`;
-// inputField.value = '';
-
-//         const task = document.createElement('li');
-//         task.classList.add('.current_task');
-//         task.textContent = inputField.value;
-//         ongoingTasksList.appendChild(task);
-
-//         const statusBoxDiv = document.createElement('div');
-//         const statusBox = document.createElement('input');
-//         statusBoxDiv.appendChild(statusBox);
-//         statusBoxDiv.classList.add('.liContainer');
-//         statusBox.type = 'checkbox';
-//         statusBox.classList.add('.checkbox');
-//         task.appendChild(statusBoxDiv);
-//     }
-// });
-
-// if (document.querySelector('.ongoing_task').children) {
-//     console.log('rame');
-// }
-
-
-
-//////// OLD CODE ABOVE ////////
-////////////////////////////////
-//////// NEW CODE BELOW ////////
-
-
-
-
 const setName = document.querySelector('#set_short_description');
 const setPriority = document.querySelector('#set_task_priority');
 const setStatus = document.querySelector('#set_task_status');
@@ -64,12 +22,7 @@ const taskCreator = function () {
 
     information.push(currentInfo);
 
-    // Declaring value variables
-
     //  full task card
-
-
-
 
     for (let i = 0; i < information.length; i++) {
         if (information[i].objectAdded === true) {
@@ -91,21 +44,21 @@ const taskCreator = function () {
             wrap.appendChild(taskName);
             // priority
             const taskPriority = document.createElement('span');
-            taskPriority.textContent = setPriority.value;
+            taskPriority.textContent = information[i].priorityTask;
             taskPriority.classList.add('task_priority');
             wrap.appendChild(taskPriority);
             // status
             const taskStatus = document.createElement('div');
             const clonedStatus = document.querySelector('#set_task_status').cloneNode(true);
             clonedStatus.classList.add('task_status');
-            clonedStatus.value = setStatus.value;
+            clonedStatus.value = information[i].statusTask;
             // 
             taskStatus.appendChild(clonedStatus);
             // 
             wrap.appendChild(taskStatus);
             // description
             const taskDescription = document.createElement('p');
-            taskDescription.textContent = setDescription.value;
+            taskDescription.textContent = information[i].descriptionTask;
             taskDescription.contentEditable = true;
             taskStatus.classList.add('task_description');
             newTask.appendChild(taskDescription);
@@ -150,37 +103,91 @@ const taskCreator = function () {
                 }
             });
         }
-        console.log(information);
     }
-
-    // console.log(taskStatus);
-
-
-
-    ///////////////////////////////////
-
-    // for (let i = 0; i < information.length; i++) {
-    //     if (information[i].priorityTask > 2)
-    //         console.log(information[i].priorityTask);
-    // }
-
-    // if(setPriority.value <  )
-
-    ///////////////////////////////////
-
-    // todoSection.appendChild(newTask);
-
-    // console.log(`boloshi + ${information}`);
+    setLS();
 }
 
-const updateLS = function () {
-    localStorage.setItem('allTheInfo', JSON.stringify(information));
+const setLS = function () {
+    localStorage.clear()
+    localStorage.setItem('info', JSON.stringify(information));
 }
+
+
+window.addEventListener('DOMContentLoaded', function () {
+    const savedInfo = JSON.parse(localStorage.getItem('info'));
+    console.log(savedInfo);
+    if (savedInfo) {
+        for (let i = 0; i < savedInfo.length; i++) {
+            const newTask = document.createElement('div');
+            newTask.classList.add("task_card");
+            // wrapper for priority status and name 
+            const wrap = document.createElement('div');
+            wrap.classList.add("name_prio_status_wrap");
+            newTask.appendChild(wrap);
+            // name
+            const taskName = document.createElement('span');
+            taskName.textContent = savedInfo[i].nameTask;
+            taskName.classList.add("task_name");
+            wrap.appendChild(taskName);
+            // priority
+            const taskPriority = document.createElement('span');
+            taskPriority.textContent = savedInfo[i].priorityTask;
+            taskPriority.classList.add('task_priority');
+            wrap.appendChild(taskPriority);
+            // status
+            const taskStatus = document.createElement('div');
+            const clonedStatus = document.querySelector('#set_task_status').cloneNode(true);
+            clonedStatus.classList.add('task_status');
+            clonedStatus.value = savedInfo[i].statusTask;
+            // 
+            taskStatus.appendChild(clonedStatus);
+            // 
+            wrap.appendChild(taskStatus);
+            // description
+            const taskDescription = document.createElement('p');
+            taskDescription.textContent = savedInfo[i].descriptionTask;
+            taskDescription.contentEditable = true;
+            taskStatus.classList.add('task_description');
+            newTask.appendChild(taskDescription);
+
+            // Adding unique ID attribute to the parent div
+            newTask.setAttribute('id', i);
+
+            if (clonedStatus.value === 'To Do') {
+                todoSection.appendChild(newTask);
+                // console.log(newTask);
+            } else if (clonedStatus.value === 'In Progress') {
+                inProgressSection.appendChild(newTask);
+            } else if (clonedStatus.value === 'Completed') {
+                doneSection.appendChild(newTask);
+            }
+
+            clonedStatus.addEventListener('change', function () {
+                if (clonedStatus.value === 'To Do') {
+                    todoSection.appendChild(newTask);
+                    console.log(newTask);
+                } else if (clonedStatus.value === 'In Progress') {
+                    inProgressSection.appendChild(newTask);
+                } else if (clonedStatus.value === 'Completed') {
+                    doneSection.appendChild(newTask);
+                }
+            })
+        }
+    }
+});
+
+
+//////////////////////???????????///////////////////////
+
+
+// const updateLS = function () {
+//     localStorage.setItem('allTheInfo', JSON.stringify(information));
+// }
 
 const parsedInfo = JSON.parse(localStorage.getItem('allTheInfo'));
 
 createTask.addEventListener('click', function (e) {
     e.preventDefault();
     taskCreator();
-    updateLS();
+    // updateLS();
 });
