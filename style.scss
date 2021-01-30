@@ -1,0 +1,200 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+// .todo_app {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     padding: 0 20px;
+//     background-color: lightgrey;
+//     margin: 0 15%;
+//     margin-top: 50px;
+//     border-radius: 2px;
+
+//     .tab {
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         border-bottom: black solid 1px;
+//         width: 100%;
+
+//         h3 {
+//             padding: 5px 0;
+//         }
+//     }
+// }
+
+// .ongoing_tasks {
+//     display: flex;
+//     flex-direction: column;
+//     background-color: lightblue;
+//     color: green;
+//     width: 100%;
+
+//     li {
+//         display: flex;
+//         justify-content: space-around;
+//     }
+// }
+
+
+
+                        //////// OLD CODE ABOVE ////////
+                        ////////////////////////////////
+                        //////// NEW CODE BELOW ////////
+
+
+
+
+
+.creation_section {
+    width: 100%;
+    background: linear-gradient(to right,rgb(216, 49, 49), rgb(100, 35, 11));
+    display: flex;
+    flex-direction: column;
+}
+
+.creator {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 60px 25px 60px;
+
+    max-width: 800px;
+
+    label {
+        margin: 2px 0px 6px 0px;
+        padding-left: 4px;
+        color: white;
+    }
+
+    .input_field {
+        height: 35px;
+        border: 2px solid rgba($color: #d10000, $alpha: 1.0);
+        border-radius: 4px;
+        background-color: rgba($color: #000000, $alpha: .7);
+        color: white;
+        padding: 0px 15px;
+    }
+    
+    .submit {
+        margin-top: 20px;
+        padding: 8px 14px;
+        width: 120px;
+        align-self: center;
+        background-color: rgba($color: #000, $alpha: .2);
+        color: white;
+        border: 2px solid rgba($color: #f5eeee, $alpha: 1.0);
+        border-radius: 3px;
+        cursor: pointer;
+
+        &:hover {
+            color: white;
+            background-color: rgba($color: #000, $alpha: 1);
+            border: 2px solid rgba($color: black, $alpha: 1.0);
+        }
+    }
+}
+
+.smaller_inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .inner_input_wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        label {
+            padding: 0;
+        }
+    }
+}
+
+
+.todo_section, .in_progress_section, .done_section {
+    background: linear-gradient(to left,rgb(216, 49, 49), rgb(100, 35, 11));
+    display: flex;
+    flex-direction: column;
+}
+
+.task_card {
+    border-bottom: 2px solid  rgb(41, 29, 24);
+    padding: 10px;
+
+    .name_prio_status_wrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .task_name {
+        color: white;
+        background-color: rgba(41, 29, 24, 0.7);
+        padding: 5px 25px;
+        border-radius: 5px;
+        // width: 132px; //Makes tabs look a bit cleaner
+        text-align: center;
+        border: none;
+        
+    }
+
+    .task_status {
+        color: white;
+        background-color: rgba(41, 29, 24, 0.7);
+        padding: 5px 15px;
+        border-radius: 5px;
+        width: 132px; //Makes tabs look a bit cleaner
+        text-align: center;
+        border: none;
+    }
+
+    .task_priority {
+        color: white;
+        background-color: rgba(41, 29, 24, 0.7);
+        padding: 3px 5px;
+        border-radius: 5px;
+        // width: 132px; //Makes tabs look a bit cleaner
+        text-align: center;
+        border: none;
+
+
+    }
+
+     p {
+        color: white;
+        padding: 10px 20px;
+    }
+
+    .delete_button {
+        background-color: rgba($color: #000000, $alpha: 0);
+        border: 1px solid black;
+        font-weight: bolder;
+        font-size: 12px;
+        padding: 1px 6px;
+        cursor: pointer;
+
+        &:hover {
+            color: white;
+            background-color: black;
+            border-radius: 5px;
+        }
+    }
+}
+
+// HEADING OF THE SECTION 
+
+.section_heading {
+    background-color: rgba(41, 29, 24, 1);
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(218, 200, 200);
+    padding: 4px 0;
+}

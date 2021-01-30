@@ -1,0 +1,134 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.creation_section {
+  width: 100%;
+  background: linear-gradient(to right, #d83131, #64230b);
+  display: flex;
+  flex-direction: column;
+}
+
+.creator {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 60px 25px 60px;
+  max-width: 800px;
+}
+.creator label {
+  margin: 2px 0px 6px 0px;
+  padding-left: 4px;
+  color: white;
+}
+.creator .input_field {
+  height: 35px;
+  border: 2px solid #d10000;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0px 15px;
+}
+.creator .submit {
+  margin-top: 20px;
+  padding: 8px 14px;
+  width: 120px;
+  align-self: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  border: 2px solid #f5eeee;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.creator .submit:hover {
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+}
+
+.smaller_inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.smaller_inputs .inner_input_wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.smaller_inputs .inner_input_wrap label {
+  padding: 0;
+}
+
+.todo_section, .in_progress_section, .done_section {
+  background: linear-gradient(to left, #d83131, #64230b);
+  display: flex;
+  flex-direction: column;
+}
+
+.task_card {
+  border-bottom: 2px solid #291d18;
+  padding: 10px;
+}
+.task_card .name_prio_status_wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.task_card .task_name {
+  color: white;
+  background-color: rgba(41, 29, 24, 0.7);
+  padding: 5px 25px;
+  border-radius: 5px;
+  text-align: center;
+  border: none;
+}
+.task_card .task_status {
+  color: white;
+  background-color: rgba(41, 29, 24, 0.7);
+  padding: 5px 15px;
+  border-radius: 5px;
+  width: 132px;
+  text-align: center;
+  border: none;
+}
+.task_card .task_priority {
+  color: white;
+  background-color: rgba(41, 29, 24, 0.7);
+  padding: 3px 5px;
+  border-radius: 5px;
+  text-align: center;
+  border: none;
+}
+.task_card p {
+  color: white;
+  padding: 10px 20px;
+}
+.task_card .delete_button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid black;
+  font-weight: bolder;
+  font-size: 12px;
+  padding: 1px 6px;
+  cursor: pointer;
+}
+.task_card .delete_button:hover {
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+}
+
+.section_heading {
+  background-color: #291d18;
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+  color: #dac8c8;
+  padding: 4px 0;
+}
+
+/*# sourceMappingURL=compiled.css.map */

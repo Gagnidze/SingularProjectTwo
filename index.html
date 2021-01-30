@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./compiled.css">
+    <title>ToDo List</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+    </style>
+</head>
+
+<body>
+    <div class="main_container">
+
+        <div class="secondary_container">
+
+            <div class="creation_section">
+                <span class="section_heading">Add a task</span>
+                <form class="creator">
+                    <label for="set_short_description">Name the task</label>
+                    <input type="text" id="set_short_description" class="input_field">
+
+                    <div class="smaller_inputs">
+
+                        <div class="inner_input_wrap">
+                            <label for="set_task_priority">Priority</label>
+                            <input type="number" id="set_task_priority" min="1" max="10" class="input_field">
+                        </div>
+
+                        <div class="inner_input_wrap">
+                            <label for="set_task_status">Status</label>
+                            <select name="set_task_status" id="set_task_status" class="input_field">
+
+                                <option value="To Do">To Do</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="set_full_description">Description</label>
+                    <input type="text" id="set_full_description" class="input_field">
+
+                    <input type="submit" value="Get Going!" class="submit">
+                </form>
+            </div>
+
+            <div class="todo_section">
+                <!-- TODOS COME HERE FROM JAVASCRIPT -->
+                <span class="section_heading">Your To Do's</span>
+            </div>
+
+            <div class="in_progress_section">
+                <span class="section_heading">In Progress</span>
+            </div>
+
+            <div class="done_section">
+                <span class="section_heading">Completed Tasks</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="./logic.js"></script>
+</body>
+
+</html>
