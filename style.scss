@@ -98,6 +98,23 @@
             border: 2px solid rgba($color: black, $alpha: 1.0);
         }
     }
+
+    .clear {
+        margin-top: 10px;
+        padding: 3px 14px;
+        width: 220px;
+        align-self: center;
+        background-color: rgba($color: #000, $alpha: .2);
+        color: white;
+        border: 2px solid rgba($color: black, $alpha: 1.0);
+        cursor: pointer;
+
+        &:hover {
+            color: white;
+            background-color: rgba($color: #000, $alpha: 1);
+            border: 2px solid rgba($color: black, $alpha: 1.0);
+        }
+    }
 }
 
 .smaller_inputs {

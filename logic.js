@@ -3,6 +3,7 @@ const setPriority = document.querySelector('#set_task_priority');
 const setStatus = document.querySelector('#set_task_status');
 const setDescription = document.querySelector('#set_full_description');
 const createTask = document.querySelector('.submit');
+const deleteAll = document.querySelector('.clear');
 
 const todoSection = document.querySelector('.todo_section');
 const inProgressSection = document.querySelector('.in_progress_section');
@@ -23,6 +24,12 @@ const setLS = function () {
     localStorage.setItem('info', JSON.stringify(information));
 }
 
+const prioritySorter = function () {
+    information.sort(function (a, b) {
+        return a.priorityTask - b.priorityTask;
+    });
+}
+
 
 const taskCreator = function () {
 
@@ -35,6 +42,7 @@ const taskCreator = function () {
     }
 
     information.push(currentInfo);
+    prioritySorter();
 
     //  full task card
 
@@ -61,6 +69,9 @@ const taskCreator = function () {
             taskPriority.textContent = information[i].priorityTask;
             taskPriority.classList.add('task_priority');
             wrap.appendChild(taskPriority);
+
+
+
             // status
             const taskStatus = document.createElement('div');
             const clonedStatus = document.querySelector('#set_task_status').cloneNode(true);
@@ -75,6 +86,7 @@ const taskCreator = function () {
             taskDescription.textContent = information[i].descriptionTask;
             taskDescription.contentEditable = true;
             taskStatus.classList.add('task_description');
+            prioritySorter();
             newTask.appendChild(taskDescription);
 
             // Adding unique ID attribute to the parent div
@@ -126,6 +138,7 @@ const taskCreator = function () {
             });
         }
     }
+    prioritySorter();
     setLS();
 }
 
@@ -150,6 +163,9 @@ window.addEventListener('DOMContentLoaded', function () {
             taskPriority.textContent = savedInfo[i].priorityTask;
             taskPriority.classList.add('task_priority');
             wrap.appendChild(taskPriority);
+
+
+
             // status
             const taskStatus = document.createElement('div');
             const clonedStatus = document.querySelector('#set_task_status').cloneNode(true);
@@ -216,6 +232,12 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
     setLS();
+    prioritySorter();
+});
+
+deleteAll.addEventListener('click', function () {
+    information = [];
+    setLS();
 });
 
 
@@ -229,7 +251,7 @@ window.addEventListener('DOMContentLoaded', function () {
 const parsedInfo = JSON.parse(localStorage.getItem('allTheInfo'));
 
 createTask.addEventListener('click', function (e) {
+    prioritySorter();
     e.preventDefault();
     taskCreator();
-    // updateLS();
 });
