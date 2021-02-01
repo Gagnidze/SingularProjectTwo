@@ -8,7 +8,21 @@ const todoSection = document.querySelector('.todo_section');
 const inProgressSection = document.querySelector('.in_progress_section');
 const doneSection = document.querySelector('.done_section');
 
-const information = [];
+// Parsing or setting LS if it is empty
+
+let information;
+
+if (localStorage.getItem('info') === null) {
+    information = [];
+} else {
+    information = JSON.parse(localStorage.getItem('info'));
+}
+
+const setLS = function () {
+    localStorage.clear()
+    localStorage.setItem('info', JSON.stringify(information));
+}
+
 
 const taskCreator = function () {
 
@@ -100,18 +114,20 @@ const taskCreator = function () {
                 if (confirm('You sure my man?!')) {
                     information.splice(targetId, 1);
                     deleteTask.parentElement.parentElement.remove();
+                    setLS();
                 }
+            });
+
+            clonedStatus.addEventListener('change', function (e) {
+                const targetId = e.target.parentElement.parentElement.parentElement.getAttribute('id');
+                console.log(information[targetId].statusTask);
+                information[targetId].statusTask = clonedStatus.value;
+                setLS();
             });
         }
     }
     setLS();
 }
-
-const setLS = function () {
-    localStorage.clear()
-    localStorage.setItem('info', JSON.stringify(information));
-}
-
 
 window.addEventListener('DOMContentLoaded', function () {
     const savedInfo = JSON.parse(localStorage.getItem('info'));
@@ -172,8 +188,34 @@ window.addEventListener('DOMContentLoaded', function () {
                     doneSection.appendChild(newTask);
                 }
             })
+
+            // delete button
+
+            const deleteTask = document.createElement('button');
+            deleteTask.textContent = 'Delete';
+            deleteTask.classList.add('delete_button');
+            wrap.appendChild(deleteTask);
+
+            information[i].objectAdded = true;
+
+            deleteTask.addEventListener('click', function (e) {
+                const targetId = e.target.parentElement.parentElement.getAttribute('id');
+                if (confirm('You sure my man?!')) {
+                    information.splice(targetId, 1);
+                    deleteTask.parentElement.parentElement.remove();
+                    setLS();
+                }
+            });
+
+            clonedStatus.addEventListener('change', function (e) {
+                const targetId = e.target.parentElement.parentElement.parentElement.getAttribute('id');
+                console.log(information[targetId].statusTask);
+                information[targetId].statusTask = clonedStatus.value;
+                setLS();
+            });
         }
     }
+    setLS();
 });
 
 
