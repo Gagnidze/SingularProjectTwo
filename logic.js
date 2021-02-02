@@ -24,11 +24,15 @@ const setLS = function () {
     localStorage.setItem('info', JSON.stringify(information));
 }
 
+// Sort tasks by priority
+
 const prioritySorter = function () {
     information.sort(function (a, b) {
         return a.priorityTask - b.priorityTask;
     });
 }
+
+createTask.addEventListener('click', prioritySorter());
 
 
 const taskCreator = function () {
@@ -41,6 +45,7 @@ const taskCreator = function () {
         objectAdded: false
     }
 
+    prioritySorter();
     information.push(currentInfo);
     prioritySorter();
 
@@ -67,6 +72,7 @@ const taskCreator = function () {
             // priority
             const taskPriority = document.createElement('span');
             taskPriority.textContent = information[i].priorityTask;
+            taskPriority.contentEditable = true;
             taskPriority.classList.add('task_priority');
             wrap.appendChild(taskPriority);
 
@@ -136,6 +142,16 @@ const taskCreator = function () {
                 information[targetId].statusTask = clonedStatus.value;
                 setLS();
             });
+
+            taskPriority.addEventListener('DOMSubtreeModified', function (e) {
+                // e.preventDefault();
+                // confirm('yea?');
+                const targetId = e.target.parentElement.parentElement.parentElement.getAttribute('id');
+                information[targetId].priorityTask = taskPriority.textContent;
+                prioritySorter();
+                setLS();
+                location.reload()
+            });
         }
     }
     prioritySorter();
@@ -162,9 +178,8 @@ window.addEventListener('DOMContentLoaded', function () {
             const taskPriority = document.createElement('span');
             taskPriority.textContent = savedInfo[i].priorityTask;
             taskPriority.classList.add('task_priority');
+            taskPriority.contentEditable = true;
             wrap.appendChild(taskPriority);
-
-
 
             // status
             const taskStatus = document.createElement('div');
@@ -229,6 +244,16 @@ window.addEventListener('DOMContentLoaded', function () {
                 information[targetId].statusTask = clonedStatus.value;
                 setLS();
             });
+
+            taskPriority.addEventListener('DOMSubtreeModified', function (e) {
+                // e.preventDefault();
+                // confirm('yea?');
+                const targetId = e.target.parentElement.parentElement.parentElement.getAttribute('id');
+                information[targetId].priorityTask = taskPriority.textContent;
+                prioritySorter();
+                setLS();
+                location.reload()
+            });
         }
     }
     setLS();
@@ -236,19 +261,11 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 deleteAll.addEventListener('click', function () {
-    information = [];
-    setLS();
+    if (confirm('If you proceed, all your tasks will be forever deleted, are you sure?')) {
+        information = [];
+        setLS();
+    }
 });
-
-
-//////////////////////???????????///////////////////////
-
-
-// const updateLS = function () {
-//     localStorage.setItem('allTheInfo', JSON.stringify(information));
-// }
-
-const parsedInfo = JSON.parse(localStorage.getItem('allTheInfo'));
 
 createTask.addEventListener('click', function (e) {
     prioritySorter();
